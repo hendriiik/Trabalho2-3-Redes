@@ -34,12 +34,12 @@ char* encMDPC(char* msg, size_t sz){
     size_t sum=0;
     size_t j=-1;
     for (size_t i=0;i<sz;++i){ //sz/2 ?
-        sum+=msg[i]; //-'0'
+        sum+=msg[i]-'0'; //-'0'
         ///if (i==0){
         //    msg2[0]=msg[0]-'0';
         //}
         //else{
-            msg2[j+(i%2)+1]=msg[i];//-'0'
+            msg2[j+(i%2)+1]=msg[i]-'0';//-'0'
         //}
         if ((i)%2!=0){
             //printf("%ld\n",sum3);
@@ -52,7 +52,7 @@ char* encMDPC(char* msg, size_t sz){
     sum=0;
     for (size_t i=0;i<sz;i+=2){
         //sum+=*(*(msg+i)+2);
-        sum+=*((msg+i)); //-'0'
+        sum+=*((msg+i))-'0'; //-'0'
         /*if ((i+1)%2==0){
 
         }*/
@@ -62,7 +62,7 @@ char* encMDPC(char* msg, size_t sz){
 
     for (size_t i=1;i<sz;i+=2){
         //sum+=*(*(msg+i)+2);
-        sum+=*((msg+i)); //-'0'
+        sum+=*((msg+i))-'0'; //-'0'
     }
     msg2[totSz-1]=sum;
     //realloc to add to array?
@@ -90,16 +90,25 @@ char* decMDPC(char* msg, size_t sz){
 
 //correcting decode - might pass to decoder later
 char* correcMDPC(char* msg, size_t sz){
-    size_t newSz=sz-(sz/2);
+    size_t newSz=sz-(sz/2); //8-4=4
     char* msg2=malloc(newSz);
     int j=0;
-    for (size_t i=0;i<sz;++i){ //up to newSz?
+    //msg2=msg;
+    //strcpy(msg2,msg);
+    //printf("where\n");
+    for (size_t i=0;i<sz-3;++i){ //up to newSz? //i+=3
         //for (size_t j=1;j<=2;++j){
-        msg2[i]=msg[i+j];
+         msg2[i]=msg[i+j];
+        //printf("where\n");
         //printf("%ld %d\n",i,msg2[i]);
         if (i%2!=0){
-            if (msg[i+1]!=abs(msg[i]-msg[i-1])){
-                msg[i-1]=abs(msg[i+1]-msg[i]);
+            //printf("where\n");
+            printf("%d %d %d %d\n", i, msg[i+j-1]-'0', msg[i+j]-'0', msg[i+j+1]-'0');
+            if (msg[i+j+1]-'0'!=abs(msg[i+j]-'0'+msg[i+j-1]-'0')){
+                //printf("4where%d\n",i);
+                msg2[i-1]=abs(msg[i+j+1]-msg[i+j]);
+                printf("%d %d %d %d %d\n", i, msg[i+j-1]-'0', msg[i+j]-'0', msg[i+j+1]-'0',msg2[i+j-1]-'0');
+                printf("4where%d\n",i);
             }
             ++j;
         }

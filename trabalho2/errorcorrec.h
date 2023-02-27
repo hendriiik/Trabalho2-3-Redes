@@ -6,5 +6,6 @@
 
 char* encMDPC(char* msg, size_t sz);
 char* decMDPC(char* msg, size_t sz);
+char* correcMDPC(char* msg, size_t sz);
 
 #endif

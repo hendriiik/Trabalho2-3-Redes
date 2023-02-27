@@ -26,10 +26,16 @@ int main(void){
     //printf("%ld\n",encMDPC(msg,6));
     char* ret=encMDPC(msg,6);
     for (int i=0;i<(6+3+2);++i){
-        printf("%d %d %c\n",i,ret[i],ret[i]);
+        //printf("%d %d %c\n",i,ret[i],ret[i]);
+        printf("%d ",ret[i]);
     }
-    char* newRet = decMDPC(ret,11);
-    for (int i=0;i<(6);++i){
+    printf("\n");
+    //printf("%s\n",ret);
+    ret="22532554";
+    ret="325225428";
+    //ret="12312324";
+    char* newRet = correcMDPC(ret,11); //11 //3232
+    for (int i=0;i<(6);++i){ //6
         printf("%d %d %c\n",i,newRet[i],newRet[i]);
     }
     ///printf("%u\n",crc32("123456789",9));
