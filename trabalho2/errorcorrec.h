@@ -4,8 +4,8 @@
 #include<math.h>
 #include<string.h>
 
-char* encMDPC(char* msg, size_t sz);
-char* decMDPC(char* msg, size_t sz);
-char* correcMDPC(char* msg, size_t sz);
+int* encMDPC(int* msg, size_t sz);
+int* decMDPC(int* msg, size_t sz);
+int* correcMDPC(int* msg, size_t sz);
 
 #endif
