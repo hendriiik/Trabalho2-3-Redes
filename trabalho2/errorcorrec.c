@@ -105,10 +105,10 @@ int* correcMDPC(int* msg, size_t sz){
             //printf("where\n");
             ///printf("%d %d %d %d\n", i, msg[i+j-1], msg[i+j], msg[i+j+1]);
             if (msg[i+j+1]!=abs(msg[i+j]+msg[i+j-1])){ //-'0' all
-                printf("4where%d\n",i);
+                //printf("4where%d\n",i);
                 msg2[i-1]=abs(msg[i+j+1]-msg[i+j]); //-'0' all
-                printf("%d %d %d %d %d\n", i, msg[i+j-1], msg[i+j], msg[i+j+1],msg2[i+j-1]);
-                printf("4where%d\n",i);
+                //printf("%d %d %d %d %d\n", i, msg[i+j-1], msg[i+j], msg[i+j+1],msg2[i+j-1]);
+                ///printf("4where%d\n",i);
             }
             ++j;
         }
