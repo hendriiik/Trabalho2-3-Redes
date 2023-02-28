@@ -85,26 +85,18 @@ char* crcRemainder(char* in, char* polyn, char fill){
     char* end;
     size_t len=strlen(in);
     char* ret=malloc(3);
-    //end=in+(strlen(in)-1);
-    //comp=strtol(in,&end,10);
-    //snprintf(comp,strlen(in),"%s",in);
     in=nPadString(3,in); 
     int i=0,j=0;
     
-    //in[0]=itoa(in[0]^polyn[0]); in[1]=itoa(in[1]^polyn[1]); in[2]=itoa(in[2]^polyn[2]); in[3]=itoa(in[3]^polyn[3]);
-    //snprintf(in[0],1,"%d",in[0]^polyn[0]);
-    while (!elemEqual(in,len,'0')){ //!elemEqual(in,len,'0')
+    while (!elemEqual(in,len,'0')){ 
         i=strchr(in,'1')-in;
         printf("%d\n",i);
         in[0+i]^=polyn[0]; in[1+i]^=polyn[1]; in[2+i]^=polyn[2]; in[3+i]^=polyn[3];
         in[0+i]+='0'; in[1+i]+='0'; in[2+i]+='0'; in[3+i]+='0';
-        //++i;
         ++j;
-        //comp=strtol(in,&end,10);
         printf("%s\n",in);
     }
     ret[0]=in[len]; ret[1]=in[len+1]; ret[2]=in[len+2];
-    //printf("%s %ld\n",in,comp);
     return ret;
 }
 
@@ -114,17 +106,13 @@ int crcCheck(char* in, char* polyn, char* check){
     strcat(in2,check);
     printf("%s\n",in2);
     int i=0;
-    while (!elemEqual(in2,strlen(in2),'0')){ //!elemEqual(in,len,'0')
+    while (!elemEqual(in2,strlen(in2),'0')){ 
         i=strchr(in2,'1')-in2;
         if (3+i>strlen(in2)){
             return 0;
         }
-        //printf("%d\n",i);
         in2[0+i]^=polyn[0]; in2[1+i]^=polyn[1]; in2[2+i]^=polyn[2]; in2[3+i]^=polyn[3];
         in2[0+i]+='0'; in2[1+i]+='0'; in2[2+i]+='0'; in2[3+i]+='0';
-        //++i;
-        //++j;
-        //comp=strtol(in,&end,10);
         printf("%s\n",in2);
     }
     return 1;
