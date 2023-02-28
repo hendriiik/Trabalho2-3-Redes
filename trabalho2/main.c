@@ -3,13 +3,15 @@
 #include"errorcorrec.h"
 //#include<math.h>
 
+//gcc main.c errorcorrec.c ./crc/crc.c -o main -lm
 int main(void){
     char c2[14] = "11010011101100";
     char c[4] = "1011";
     unsigned int data[] = {1,2,3,4,5,6,7,8,9}; //uint8_t
     printf("Assinatura CRC de 123456789, funcao por tabela: %u\n",CRC32Wiki(data,9)); //1511307769???
-    printf("Assinatura CRC de 123456789, funcao sem tabela: %u\n",crc32(data,9)); 
-    printf("Checagem de remainder de 11010011101100 com 1011 %s\n",crcRemainder(c2,c,'0')); //crcRemainder(c2,c,'0')[1]
+    printf("Assinatura CRC de 123456789, funcao sem tabela: %u\n\n",crc32((char*)data,9)); 
+    printf("Processo do Remainder:\n");
+    printf("\nChecagem de remainder de 11010011101100 com 1011: %s\n\n",crcRemainder(c2,c,'0')); //crcRemainder(c2,c,'0')[1]
     printf("Checando se 11010011101100 com 1011 da 101:\n");
     crcCheck(c2,c,"101");
     //size_t msg[6]={1,2,3,4,6,7};
@@ -17,7 +19,7 @@ int main(void){
     int msg[6]={1,2,3,4,6,7};
     
     //printf("%ld\n",encMDPC(msg,6));
-    printf("Codificando 123467 em MDPC: \n");
+    printf("\nCodificando 123467 em MDPC: \n");
     int* ret=encMDPC(msg,6);
     for (int i=0;i<(6+3+2);++i){
         //printf("%d %d %c\n",i,ret[i],ret[i]);
